@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { CardMovie } from './CardMovie';
 
 import { getMovie } from '../api/api';
+import { useSelector } from 'react-redux';
+import { Modal } from './Modal';
+
 
 export const Movies = () => {
 
+    const countLists = useSelector(state => state.lists.lists);
+    // console.log(countLists);
+
+    const [modalActive, setModalActive] = useState(true);
     const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         year: "2020-2022",
@@ -18,11 +25,12 @@ export const Movies = () => {
     }, [filter]);
 
   return (
+    <>
     <div className='movies'>
         <div className="container">
             <h1 className='movies-title'>Movies</h1>
             <div className='movies-filter'>
-                <div>Filters</div>
+                <div >Filters <button onClick={() => setModalActive(true)}>active</button></div>
                 <div className="movies-filter__year">
                     <label htmlFor="year">Year</label>
                     <select name="year" id='year' value={filter.year} onChange={(e) => setFilter({ year: e.target.value, type: filter.type, page: "1", rating: filter.rating })}>
@@ -62,5 +70,7 @@ export const Movies = () => {
             </ul>
         </div>
     </div>
+    <Modal active={modalActive} setActive={setModalActive} />
+    </>
   )
 }

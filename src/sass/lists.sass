@@ -1,33 +1,22 @@
-.movies
+.lists
     &-list
         display: flex
         flex-wrap: wrap
         gap: 30px
-
     &-card 
         width: 30%
+        // height: 100px
         border: 1px solid #000
-        background: #222
-
+        border-radius: 15px
+        // z-index: 1000 !important
+        padding: 5px
         &__image
             height: 200px
             background-size: cover
             background-position-y: top
             background-repeat: none
-        &__name 
-            display: flex
-            justify-content: space-between
-            padding: 20px 15px
-            align-items: center 
-
-        .iconHeartRed 
-            color: red
-            cursor: pointer
-        .iconHeartWhite
-            color: white
-            cursor: pointer
-        .iconHeartWhite:hover
-            color: red
+        &__name
+            background: #222
     &-filter
         background: #222
         padding: 15px
