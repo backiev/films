@@ -23,11 +23,17 @@ const listsSlice = createSlice({
             state.lists[state.lists.length-1].value.push(action.payload);
         },
         removeFromList: (state, action) => {
-            // state.lists[]
+            // console.log(123213123);
+            // .indexOf(action.payload.idMovie)
+            // console.log(action.payload.idMovie);
+            console.log(action.payload.indexList, action.payload.idMovie);
+            state.lists[action.payload.indexList].value.splice(action.payload.idMovie, 1);
+            // console.log(state.lists);
+            // state.lists[action.payload.indexList].splice(indexMovie, 1);
         }
     }
 });
 
-export const {createList, addToList, addToLastList} = listsSlice.actions;
+export const {createList, addToList, addToLastList, removeFromList} = listsSlice.actions;
 
 export default listsSlice.reducer

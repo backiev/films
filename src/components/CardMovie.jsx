@@ -9,7 +9,7 @@ import { Modal } from './Modal';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { activatedModal, disActivatedModal } from '../app/ModalSlice';
-import { addToLastList } from '../app/ListsSlice';
+import { addToLastList, removeFromList } from '../app/ListsSlice';
 
 
 
@@ -23,10 +23,11 @@ export const CardMovie = ({movie}) => {
 
   // Делаем один массив из всех избранных фильмов
   let allIdFilmsFromLists = [];
+  let indexOfList = null;
   lists.map(item => allIdFilmsFromLists.push(item.value));
-  const indexList = allIdFilmsFromLists.map((item, index) => item.find(itemList => itemList === movie.id ? index : " "));
-  console.log(indexList);
-  allIdFilmsFromLists = allIdFilmsFromLists.flat();
+
+  // console.log(indexList);
+  // allIdFilmsFromLists = allIdFilmsFromLists.flat();
   // console.log(allIdFilmsFromLists.find(item => item === movie.id));
 
 
@@ -36,7 +37,7 @@ export const CardMovie = ({movie}) => {
   // <FontAwesomeIcon icon="fa-solid fa-heart" />
 
   // Проверяем является ли фильм избранным
-  const firstIcon = allIdFilmsFromLists.find(item => item === movie.id);
+  const firstIcon = allIdFilmsFromLists.flat().find(item => item === movie.id);
   const firstFirstIcon = firstIcon ? "iconHeartRed" : "iconHeartWhite";
 
   const [toggleIcon, setToggleIcon] = useState(firstFirstIcon);
@@ -51,14 +52,22 @@ export const CardMovie = ({movie}) => {
   }
 
   const clickOnHeart = (target) => {
-    setNeededIcon(target);
-    if (!countLists) {
-      dispatch(activatedModal(movie.id));
+    if (target === "iconHeartWhite") {
+      if (!countLists) {
+        dispatch(activatedModal(movie.id));
+      } else {
+        dispatch(addToLastList(movie.id));
+      }
+      setToggleIcon("iconHeartRed");
     } else {
-      dispatch(addToLastList(movie.id));
+      allIdFilmsFromLists.map((item, index) => (
+        item.map((e, indexE) => e === movie.id ? dispatch(removeFromList({indexList: index, idMovie: indexE})) : "")
+      ));
+      setToggleIcon("iconHeartWhite");
     }
+    
   }
-
+// dispatch(removeFromList({indexList: index, idMovie: index}))
   return (
     <>
       <div className="movies-card">

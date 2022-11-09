@@ -24,7 +24,7 @@ export const Modal = () => {
             dispatch(addToList({idList: checkedList, idFilm: idFilm}));
             dispatch(clearIdFilm());
         }
-        console.log(idFilm);
+        // console.log(idFilm);
     }
 
   return (
