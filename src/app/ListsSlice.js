@@ -6,7 +6,10 @@ const listsSlice = createSlice({
     initialState: {
         lists: [
             {index: 0, name: 'first', value: []}, 
-            {index: 1, name: 'second', value: []}
+            {index: 1, name: 'second', value: []},
+            {index: 2, name: 'second', value: [1402886]},
+            {index: 3, name: 'second', value: []},
+            {index: 4, name: 'second', value: []},
         ]
     },
     reducers: {
@@ -18,6 +21,9 @@ const listsSlice = createSlice({
         },
         addToLastList: (state, action) => {
             state.lists[state.lists.length-1].value.push(action.payload);
+        },
+        removeFromList: (state, action) => {
+            // state.lists[]
         }
     }
 });

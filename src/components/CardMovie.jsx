@@ -21,12 +21,25 @@ export const CardMovie = ({movie}) => {
   const lists = useSelector(state => state.lists.lists);
   
 
+  // Делаем один массив из всех избранных фильмов
+  let allIdFilmsFromLists = [];
+  lists.map(item => allIdFilmsFromLists.push(item.value));
+  const indexList = allIdFilmsFromLists.map((item, index) => item.find(itemList => itemList === movie.id ? index : " "));
+  console.log(indexList);
+  allIdFilmsFromLists = allIdFilmsFromLists.flat();
+  // console.log(allIdFilmsFromLists.find(item => item === movie.id));
+
 
   const urlPoster = movie.poster ? movie.poster.url : '/img/woman.jpg';
   //alternativeName
   const nameMovie = movie.name ? movie.name : movie.alternativeName;
-  <FontAwesomeIcon icon="fa-solid fa-heart" />
-  const [toggleIcon, setToggleIcon] = useState('iconHeartWhite');
+  // <FontAwesomeIcon icon="fa-solid fa-heart" />
+
+  // Проверяем является ли фильм избранным
+  const firstIcon = allIdFilmsFromLists.find(item => item === movie.id);
+  const firstFirstIcon = firstIcon ? "iconHeartRed" : "iconHeartWhite";
+
+  const [toggleIcon, setToggleIcon] = useState(firstFirstIcon);
 
 
   const setNeededIcon = (target) => {

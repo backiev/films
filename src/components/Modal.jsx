@@ -23,9 +23,8 @@ export const Modal = () => {
         if (idFilm >= 0) {
             dispatch(addToList({idList: checkedList, idFilm: idFilm}));
             dispatch(clearIdFilm());
-            console.log("added", lists);
         }
-        console.log("213added", lists, idFilm);
+        console.log(idFilm);
     }
 
   return (
