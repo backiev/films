@@ -1,24 +1,36 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createList } from '../app/ListsSlice';
+import { createList, addToLastList, addToList } from '../app/ListsSlice';
+import { activatedModal, disActivatedModal, clearIdFilm} from '../app/ModalSlice';
+
 import { ModalItem } from './ModalItem';
 
-export const Modal = ({active, setActive}) => {
+export const Modal = () => {
 
     const [inputValue, setInputValue] = useState('');
     const [checkedList, setCheckedList] = useState(1);
     const lists = useSelector(state => state.lists.lists);
     const dispatch = useDispatch();
-    console.log(lists);
+    const isActivated = useSelector(state => state.modal.modalActive.active);
+    const idFilm = useSelector(state => state.modal.modalActive.idFilm);
 
     const createNewList = () => {
         dispatch(createList(inputValue))
     }
 
+    const addToPickedList = () => {
+        if (idFilm >= 0) {
+            dispatch(addToList({idList: checkedList, idFilm: idFilm}));
+            dispatch(clearIdFilm());
+            console.log("added", lists);
+        }
+        console.log("213added", lists, idFilm);
+    }
+
   return (
-    <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
-        <div className={active ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
+    <div className={isActivated ? "modal active" : "modal"} onClick={() => dispatch(disActivatedModal())}>
+        <div className={isActivated ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
             <div className="modal__content-title">Which list do u prefer?</div>
             <div className="modal__content-button">
                 <button onClick={createNewList} >create list</button>
@@ -26,7 +38,7 @@ export const Modal = ({active, setActive}) => {
             </div>
             <div className="modal__content-list">
                 {lists.map(item => <ModalItem item={item} key={item.index} checkedItem={checkedList} setCheckedItem={setCheckedList} />)}
-                <button>Add to this list</button>
+                <button onClick={() => addToPickedList() }>Add to this list</button>
             </div>
         </div>
     </div>

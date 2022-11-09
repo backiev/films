@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const ModalItem = ({item, checkedItem, setCheckedItem}) => {
-    // console.log(item);
   return (
     <div className="modal__content-list__item">
         <input type="radio" id={`contactChoice${item.index}`} name='contact' value={item.name} checked={checkedItem === item.index ? true : false} onChange={() => setCheckedItem(item.index)}/>
