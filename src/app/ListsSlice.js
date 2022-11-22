@@ -8,7 +8,7 @@ const listsSlice = createSlice({
             {index: 0, name: 'first', value: []}, 
             {index: 1, name: 'second', value: []},
             {index: 2, name: 'second', value: [1402886]},
-            {index: 3, name: 'second', value: []},
+            {index: 3, name: 'second', value: [4532097]},
             {index: 4, name: 'second', value: []},
         ]
     },
@@ -23,17 +23,11 @@ const listsSlice = createSlice({
             state.lists[state.lists.length-1].value.push(action.payload);
         },
         removeFromList: (state, action) => {
-            // console.log(123213123);
-            // .indexOf(action.payload.idMovie)
-            // console.log(action.payload.idMovie);
-            console.log(action.payload.indexList, action.payload.idMovie);
             state.lists[action.payload.indexList].value.splice(action.payload.idMovie, 1);
-            // console.log(state.lists);
-            // state.lists[action.payload.indexList].splice(indexMovie, 1);
         }
     }
 });
 
 export const {createList, addToList, addToLastList, removeFromList} = listsSlice.actions;
 
-export default listsSlice.reducer
+export default listsSlice.reducer;

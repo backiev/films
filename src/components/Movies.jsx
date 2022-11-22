@@ -15,8 +15,10 @@ export const Movies = () => {
         rating: "7-10"
     });
 
+
     useEffect(() => {
         getMovie(filter, setArrMovies);
+        console.log(123);
     }, [filter]);
 
   return (
@@ -55,7 +57,7 @@ export const Movies = () => {
             </div>
             <div className="movies-list">
 
-                {arrMovies.map(movie => <CardMovie key={movie.id} movie={movie} />)}
+                {arrMovies.map((movie, index) => <CardMovie key={movie.id} movie={movie} movieIndex={index}/>)}
 
             </div>
             <ul className="movies-pag">

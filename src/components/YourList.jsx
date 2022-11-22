@@ -5,7 +5,7 @@ import { getMovie } from '../api/api';
 
 export const YourList = () => {
 
-    const [arrMovies, setArrMovies] = useState([]);
+    // const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         byWhat: 'yourOwn'
     });
