@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-
-import { useDispatch, useSelector } from 'react-redux';
 import { activatedModal, disActivatedModal } from '../app/ModalSlice';
 import { addToLastList, removeFromList } from '../app/ListsSlice';
-
-// import {setAbleHurt, setDisableHurt} from '../app/HurtSlice';
-
-
 
 
 export const CardMovie = ({movie, movieIndex}) => {
@@ -51,7 +45,6 @@ export const CardMovie = ({movie, movieIndex}) => {
       setToggleIcon("iconHeartWhite");
     }
   }
-
   return (
     <>
       <div className="movies-card">

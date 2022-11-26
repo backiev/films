@@ -1,6 +1,7 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faUser } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { Outlet, Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 export const Header = () => {
@@ -10,8 +11,8 @@ export const Header = () => {
             <div className="header-left">
                 <div className="header__logo">backiev</div>
                 <div className="header__list">
-                    <div className="header__list-item"><a href="">movies</a></div>
-                    <div className="header__list-item"><a href="">lists</a></div>
+                    <div className="header__list-item"><Link to="/">movies</Link></div>
+                    <div className="header__list-item"><Link to="/lists">lists</Link></div>
                     <input type="text" className="header__list-input" placeholder='search...' />
                 </div>
             </div>
