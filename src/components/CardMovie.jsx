@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { activatedModal, disActivatedModal } from '../app/ModalSlice';
+import { activatedModal } from '../app/ModalSlice';
 import { addToLastList, removeFromList } from '../app/ListsSlice';
 
 

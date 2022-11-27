@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CardMovie } from './CardMovie';
 
-import { getMovie } from '../api/api';
+import { getMovies } from '../api/api';
 
 import { Modal } from './Modal';
 
@@ -14,11 +14,11 @@ export const Movies = () => {
         page: "2",
         rating: "7-10"
     });
+    //
 
 
     useEffect(() => {
-        getMovie(filter, setArrMovies);
-        console.log(123);
+        getMovies(filter, setArrMovies);
     }, [filter]);
 
   return (

@@ -2,8 +2,8 @@ import React from 'react'
 // import { useEffect } from 'react';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createList, addToLastList, addToList } from '../app/ListsSlice';
-import { activatedModal, disActivatedModal, clearIdFilm} from '../app/ModalSlice';
+import { createList, addToList } from '../app/ListsSlice';
+import { disActivatedModal, clearIdFilm} from '../app/ModalSlice';
 
 import { ModalItem } from './ModalItem';
 
@@ -25,6 +25,7 @@ export const Modal = () => {
             dispatch(addToList({idList: checkedList, idFilm: idFilm}));
             dispatch(clearIdFilm());
             dispatch(disActivatedModal());
+            console.log(123);
         }
     }
 

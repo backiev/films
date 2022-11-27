@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { CardMovieTest } from './CardMovieTest';
+import {useSelector} from 'react-redux';
+import { useParams } from "react-router-dom";
+import { CardList } from './CardList';
+
 
 import { getMovie } from '../api/api';
 
-export const YourList = () => {
 
+export const YourList = () => {
+    const listId = useParams().listId;
+    const listValue = useSelector(state => state.lists.lists[listId].value);
+    console.log(listValue);
     // const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         byWhat: 'yourOwn'
@@ -25,16 +31,7 @@ export const YourList = () => {
                     </div>
                 </div>
                 <div className="yourList-list">
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-
-
-                    {/* {arrMovies.map(movie => <CardMovie key={movie.id} movie={movie} />)} */}
-
+                    {listValue.map(element => <CardList key={element} index={element}/>)}
                 </div>
             </div>
         </div>

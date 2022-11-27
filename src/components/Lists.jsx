@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { CardMovieTest } from './CardMovieTest';
+import { ListMovie } from './ListMovie';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 
 import { getMovie } from '../api/api';
 
 
 export const  Lists = () => {
+    const dispatch = useDispatch();
+    const lists = useSelector(state => state.lists.lists);
+    // console.log(lists);
     const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         byWhat: 'date'
     });
 
-    // useEffect(() => {
-    //     getMovie(setArrMovies);
-    // }, []);
 
     return (
         <div className='lists'>
@@ -28,15 +30,7 @@ export const  Lists = () => {
                     <div className="lists-filter-by_count"></div>
                 </div>
                 <div className="lists-list">
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
-                    <CardMovieTest />
+                    {lists.map(list => <Link to={`/yourlist/${list.index}`} className="movies-card" key={list.index}><ListMovie key={list.index} list={list} /></Link>)}
                 </div>
             </div>
         </div>

@@ -2,12 +2,11 @@ import React from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 
-
+import { Movies } from './components/Movies';
 import { Lists } from './components/Lists';
-import { YourList } from './components/YourList';
+import { YourList, loader as listLoader } from './components/YourList';
 
 
 import { createRoot } from 'react-dom/client';
@@ -25,12 +24,17 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "",
+        element: <Movies />,
+      },
+      {
         path: "lists",
         element: <Lists />,
       },
       {
-        path: "yourlist",
+        path: "yourlist/:listId",
         element: <YourList />,
+        // loader: listLoader,
       },
     ],
   },

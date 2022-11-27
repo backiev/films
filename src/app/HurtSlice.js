@@ -19,12 +19,12 @@ const hurtSlice = createSlice({
     },
     reducers: {
         setAbleHurt: (state, action) => {
-            state.hurts.map((e, index) => {
-                if (index === action.payload) state.hurts[index] = "iconHeartRed";
+            state.hurts.forEach((e, index) => {
+                if (index === action.payload) return state.hurts[index] = "iconHeartRed";
             });
         },
         setDisableHurt: (state, action) => {
-            state.hurts.map((e, index) => {
+            state.hurts.forEach((e, index) => {
                 if (index === action.payload) state.hurts[index] = "iconHeartWhite";
             });
         },
