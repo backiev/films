@@ -31,7 +31,7 @@ export const YourList = () => {
                     </div>
                 </div>
                 <div className="yourList-list">
-                    {listValue.map(element => <CardList key={element} index={element}/>)}
+                    {listValue.map((element, index) => <CardList key={element} id={element} index={index}/>)}
                 </div>
             </div>
         </div>

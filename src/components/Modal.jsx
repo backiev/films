@@ -25,7 +25,6 @@ export const Modal = () => {
             dispatch(addToList({idList: checkedList, idFilm: idFilm}));
             dispatch(clearIdFilm());
             dispatch(disActivatedModal());
-            console.log(123);
         }
     }
 

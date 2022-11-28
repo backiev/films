@@ -5,25 +5,27 @@ import { getMovie } from '../api/api';
 
 
 
-export const CardList = ({index}) => {
+export const CardList = ({id, index}) => {
   const urlPoster = '/img/woman.jpg';
   const [loadedMovie, setLoadedMovie] = useState({});
   const [imageMovie, setImageMovie] = useState(urlPoster);
 
   useEffect(() => {
-    getMovie({id: index}, setLoadedMovie, setImageMovie);
+    getMovie({id: id}, setLoadedMovie, setImageMovie);
   }, []);
 
   console.log(loadedMovie);
 
   return (
-    <>
-      <div className="movies-card">
-          <div className='movies-card__image' style={{backgroundImage: `url(${imageMovie})`}}></div>
-          <div className='movies-card__name'>
-            {loadedMovie.name}  
+    <div className='yourList-block'>
+      <div className="yourList-card">
+          <div className='yourList-card__image' style={{backgroundImage: `url(${imageMovie})`}}></div>
+          <div className='yourList-card__name'>
+            {loadedMovie.name}
+            <button className="yourList-delete">Delete</button>
           </div>
       </div>
-    </>
+      <div className="yourList-number">{index + 1}</div>
+    </div>
   )
 }

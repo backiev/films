@@ -3,9 +3,6 @@ import { ListMovie } from './ListMovie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
-import { getMovie } from '../api/api';
-
-
 export const  Lists = () => {
     const dispatch = useDispatch();
     const lists = useSelector(state => state.lists.lists);

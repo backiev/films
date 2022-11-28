@@ -5,7 +5,7 @@ const listsSlice = createSlice({
     name: 'lists',
     initialState: {
         lists: [
-            {index: 0, name: 'second', value: [4532097]},
+            {index: 0, name: 'second', value: [4532097, 4381953, 1451292, 4633578]},
         ]
     },
     reducers: {

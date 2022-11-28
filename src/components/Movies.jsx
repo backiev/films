@@ -14,8 +14,6 @@ export const Movies = () => {
         page: "2",
         rating: "7-10"
     });
-    //
-
 
     useEffect(() => {
         getMovies(filter, setArrMovies);
