@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { addToLastList, removeFromList, dragDrop } from '../app/ListsSlice';
 import { useParams } from "react-router-dom";
 import { CardList } from './CardList';
 
@@ -8,13 +9,34 @@ import { getMovie } from '../api/api';
 
 
 export const YourList = () => {
+    
+    const dispatch = useDispatch();
+
     const listId = useParams().listId;
     const listValue = useSelector(state => state.lists.lists[listId].value);
-    console.log(listValue);
     // const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         byWhat: 'yourOwn'
     });
+    const [editMode, setEditMode] = useState(false);
+    const [currentMovie, setCurrentMovie] = useState(null);
+
+    const dragStartHandler = (e, idMovie) => {
+        console.log(idMovie);
+        if (editMode) setCurrentMovie(idMovie);
+    }
+    const dragEndHandler = (e) => {
+        // console.log(123);
+    }
+    const dragOverHandler = (e) => {
+        e.preventDefault();
+        // console.log(idMovie);
+    }
+    const dropHandler = (e, idMovie) => {
+        e.preventDefault();
+        console.log(listValue.indexOf(idMovie));
+        if (editMode) dispatch(dragDrop({indexList: listId, currentMovie: currentMovie, idMovie: idMovie}));
+    }
 
     return (
         <div className='yourList'>
@@ -28,10 +50,20 @@ export const YourList = () => {
                             <option value="rating">By Rating</option>
                             <option value="yourOwn">By Your Own opinion</option>
                         </select>
+                        <button className='button' onClick={() => editMode ? setEditMode(false) : setEditMode(true)}>Edit</button>
                     </div>
                 </div>
-                <div className="yourList-list">
-                    {listValue.map((element, index) => <CardList key={element} id={element} index={index}/>)}
+                <div className={`yourList-list ${editMode ? "edit" : ""}`}>
+                    {listValue.map((element, index) => <CardList 
+                        key={element} 
+                        id={element} 
+                        index={index} 
+                        dragStartHandler={dragStartHandler} 
+                        dragEndHandler={dragEndHandler} 
+                        dragOverHandler={dragOverHandler}
+                        dropHandler={dropHandler}
+                        editMode={editMode}
+                        />)}
                 </div>
             </div>
         </div>

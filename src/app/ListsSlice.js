@@ -20,10 +20,25 @@ const listsSlice = createSlice({
         },
         removeFromList: (state, action) => {
             state.lists[action.payload.indexList].value.splice(action.payload.idMovie, 1);
+        },
+        dragDrop: (state, action) => {
+            const currentList = state.lists[action.payload.indexList];
+            const currentIdMovie = action.payload.currentMovie;
+            const idMovie = action.payload.idMovie;
+            currentList.value.map((e, index) => {
+                if (e === idMovie) {
+                    const newListValue = currentList.value.splice(index, 1, currentIdMovie);
+                    return {...currentList, value: newListValue};
+                }
+                if (e === currentIdMovie) {
+                    const newListValue = currentList.value.splice(index, 1, idMovie);
+                    return {...currentList, value: newListValue};
+                }
+            });
         }
     }
 });
 
-export const {createList, addToList, addToLastList, removeFromList} = listsSlice.actions;
+export const {createList, addToList, addToLastList, removeFromList, dragDrop} = listsSlice.actions;
 
 export default listsSlice.reducer;

@@ -5,7 +5,7 @@ import { getMovie } from '../api/api';
 
 
 
-export const CardList = ({id, index}) => {
+export const CardList = ({id, index,editMode, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler}) => {
   const urlPoster = '/img/woman.jpg';
   const [loadedMovie, setLoadedMovie] = useState({});
   const [imageMovie, setImageMovie] = useState(urlPoster);
@@ -14,10 +14,16 @@ export const CardList = ({id, index}) => {
     getMovie({id: id}, setLoadedMovie, setImageMovie);
   }, []);
 
-  console.log(loadedMovie);
-
   return (
-    <div className='yourList-block'>
+    <div className='yourList-block' 
+      draggable={true}
+      onDragStart={(e) => dragStartHandler(e, id)}
+      onDragLeave={(e) => dragEndHandler(e)}
+      onDragEnd={(e) => dragEndHandler(e)}
+      onDragOver={(e) => dragOverHandler(e)}
+      onDrop={(e) => dropHandler(e, id)}
+
+    >
       <div className="yourList-card">
           <div className='yourList-card__image' style={{backgroundImage: `url(${imageMovie})`}}></div>
           <div className='yourList-card__name'>
