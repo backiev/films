@@ -5,9 +5,6 @@ import { useParams } from "react-router-dom";
 import { CardList } from './CardList';
 
 
-import { getMovie } from '../api/api';
-
-
 export const YourList = () => {
     
     const dispatch = useDispatch();
@@ -22,7 +19,6 @@ export const YourList = () => {
     const [currentMovie, setCurrentMovie] = useState(null);
 
     const dragStartHandler = (e, idMovie) => {
-        console.log(idMovie);
         if (editMode) setCurrentMovie(idMovie);
     }
     const dragEndHandler = (e) => {
@@ -34,7 +30,6 @@ export const YourList = () => {
     }
     const dropHandler = (e, idMovie) => {
         e.preventDefault();
-        console.log(listValue.indexOf(idMovie));
         if (editMode) dispatch(dragDrop({indexList: listId, currentMovie: currentMovie, idMovie: idMovie}));
     }
 

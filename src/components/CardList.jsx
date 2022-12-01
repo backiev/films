@@ -16,7 +16,7 @@ export const CardList = ({id, index,editMode, dragStartHandler, dragEndHandler, 
 
   return (
     <div className='yourList-block' 
-      draggable={true}
+      draggable={(editMode)}
       onDragStart={(e) => dragStartHandler(e, id)}
       onDragLeave={(e) => dragEndHandler(e)}
       onDragEnd={(e) => dragEndHandler(e)}
