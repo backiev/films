@@ -8,6 +8,7 @@ import { addToLastList, removeFromList } from '../app/ListsSlice';
 
 
 export const CardMovie = ({movie, movieIndex}) => {
+  
 
   const dispatch = useDispatch();
   const countLists = useSelector(state => state.lists.lists.length);

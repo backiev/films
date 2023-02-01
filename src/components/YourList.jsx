@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { addToLastList, removeFromList, dragDrop } from '../app/ListsSlice';
+import { dragDrop } from '../app/ListsSlice';
 import { useParams } from "react-router-dom";
 import { CardList } from './CardList';
 
@@ -51,7 +51,8 @@ export const YourList = () => {
                 <div className={`yourList-list ${editMode ? "edit" : ""}`}>
                     {listValue.map((element, index) => <CardList 
                         key={element} 
-                        id={element} 
+                        id={element}
+                        listId={listId}
                         index={index} 
                         dragStartHandler={dragStartHandler} 
                         dragEndHandler={dragEndHandler} 

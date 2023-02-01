@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ListMovie } from './ListMovie';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 export const  Lists = () => {
-    const dispatch = useDispatch();
     const lists = useSelector(state => state.lists.lists);
-    // console.log(lists);
-    const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
-        byWhat: 'date'
+        byWhat: 'index'
     });
 
 
@@ -20,7 +17,7 @@ export const  Lists = () => {
                 <div className='lists-filter'>
                     <div>Lists</div>
                     <select name="year" id='year' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
-                        <option value="date">By Date</option>
+                        <option value="index">By Index</option>
                         <option value="count">By Count</option>
                     </select>
                     <div className="lists-filter-by_date"></div>

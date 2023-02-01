@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { getMovie } from '../api/api';
+import { removeFromList } from '../app/ListsSlice';
 
 
 
-export const CardList = ({id, index,editMode, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler}) => {
+export const CardList = ({id, index, listId, editMode, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler}) => {
+
+  const dispatch = useDispatch();
   const urlPoster = '/img/woman.jpg';
   const [loadedMovie, setLoadedMovie] = useState({});
   const [imageMovie, setImageMovie] = useState(urlPoster);
@@ -28,7 +31,7 @@ export const CardList = ({id, index,editMode, dragStartHandler, dragEndHandler, 
           <div className='yourList-card__image' style={{backgroundImage: `url(${imageMovie})`}}></div>
           <div className='yourList-card__name'>
             {loadedMovie.name}
-            <button className="yourList-delete">Delete</button>
+            <button className="yourList-delete" onClick={() => dispatch(removeFromList({indexList: listId, idMovie: index}))}>Delete</button>
           </div>
       </div>
       <div className="yourList-number">{index + 1}</div>
