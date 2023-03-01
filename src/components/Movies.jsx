@@ -4,6 +4,7 @@ import { CardMovie } from './CardMovie';
 import { getMovies } from '../api/api';
 
 import { Modal } from './Modal';
+import { Modalinfo } from './ModalInfo';
 
 
 export const Movies = () => {
@@ -13,6 +14,12 @@ export const Movies = () => {
         type: "1",
         page: "1",
         rating: "7-10"
+    });
+    
+    // Модальное окно для информации фильма
+    const [active, setActive] = useState({
+        visible: false,
+        movieInfo: {},
     });
 
     const filterSort = (pageItem, value) => {
@@ -69,7 +76,7 @@ export const Movies = () => {
             </div>
             <div className="movies-list">
 
-                {arrMovies.map((movie, index) => <CardMovie key={movie.id} movie={movie} movieIndex={index}/>)}
+                {arrMovies.map((movie, index) => <CardMovie key={movie.id} movie={movie} movieIndex={index} setActive={setActive}/>)}
 
             </div>
             <ul className="movies-pag">
@@ -89,6 +96,7 @@ export const Movies = () => {
             </ul>
         </div>
     </div>
+    <Modalinfo active={active} setActive={setActive} />
     <Modal />
     </>
   )

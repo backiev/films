@@ -37,12 +37,16 @@ export const Modal = () => {
             <div className={isActivated ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
                 <div className="modal__content-title">Which list do u prefer?</div>
                 <div className="modal__content-button">
-                    <button onClick={createNewList} >create list</button>
-                    <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />    
+                    <div className='modal__content-title__block'>Create new List</div>
+                    <input type="text" value={inputValue} className="modal-input" placeholder={"Type name of new List..."} onChange={(e) => setInputValue(e.target.value)} />
+                    <button onClick={createNewList} className="modal-button">Create List</button>
                 </div>
                 <div className="modal__content-list">
+                    <div className='modal__content-title__block'>Current Lists</div>
+                    <div className='modal__content-currentLists'>
                     {lists.map(item => <ModalItem item={item} key={item.index} checkedItem={checkedList} setCheckedItem={setCheckedList} />)}
-                    <button onClick={() => addToPickedList() }>Add to this list</button>
+                    </div>
+                    <button onClick={() => addToPickedList() } className="modal-button">Add to this list</button>
                 </div>
             </div>
         </div>

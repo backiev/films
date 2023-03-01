@@ -15,13 +15,14 @@ export const  Lists = () => {
             <div className="container">
                 <h1 className='lists-title'>Lists</h1>
                 <div className='lists-filter'>
-                    <div>Lists</div>
-                    <select name="year" id='year' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
-                        <option value="index">By Index</option>
-                        <option value="count">By Count</option>
-                    </select>
-                    <div className="lists-filter-by_date"></div>
-                    <div className="lists-filter-by_count"></div>
+                    <div>Filters</div>
+                    <div className='lists-filter__sort'>
+                        <label htmlFor="byWhat" className='lists-filter__byWhat'>Year</label>
+                        <select name="byWhat" id='byWhat' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
+                            <option value="index">By Index</option>
+                            <option value="count">By Count</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="lists-list">
                     {lists.map(list => <Link to={`/yourlist/${list.index}`} className="movies-card" key={list.index}><ListMovie key={list.index} list={list} /></Link>)}

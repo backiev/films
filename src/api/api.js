@@ -16,7 +16,6 @@ export const getMovies = (filter, callback) => {
     .get(`https://api.kinopoisk.dev/movie?page=${filter.page}&field=typeNumber&search=${filter.type}&field=rating.kp&search=${filter.rating}&field=year&search=${filter.year}&token=9DMCTCH-E8Q4TMF-G2FK7VA-72CD8NP`)
     .then(response => response.data)
     .then( (res) => {
-        // console.log(res.docs);
         callback(res.docs);
     })
     .catch(err => console.log(err));

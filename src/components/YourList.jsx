@@ -3,6 +3,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import { dragDrop } from '../app/ListsSlice';
 import { useParams } from "react-router-dom";
 import { CardList } from './CardList';
+import { Link } from "react-router-dom";
+
 
 
 export const YourList = () => {
@@ -38,13 +40,20 @@ export const YourList = () => {
             <div className="container">
                 <h1 className='yourList-title'>Your list: 'My list'</h1>
                 <div className='yourList-filter'>
-                    <div>Filters</div>
+                    <div className='yourList-filter__forwardLink'>
+                        <Link to={`/lists`}>Back to Links page</Link>
+                    </div>
+                    <div className='yourList-filter__title'>Filters</div>
                     <div className="yourList-filter__year">
-                        <select name="" id='year' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
-                            <option value="date">By Date</option>
-                            <option value="rating">By Rating</option>
-                            <option value="yourOwn">By Your Own opinion</option>
-                        </select>
+                        <div className='yourList-filter__labels'>
+                            <label htmlFor="year" className='yourList-filter__label'>Year</label>
+
+                            <select name="" id='year' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
+                                <option value="date">By Date</option>
+                                <option value="rating">By Rating</option>
+                                <option value="yourOwn">By Your Own opinion</option>
+                            </select>
+                        </div>
                         <button className='button' onClick={() => editMode ? setEditMode(false) : setEditMode(true)}>Edit</button>
                     </div>
                 </div>
