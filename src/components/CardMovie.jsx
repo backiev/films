@@ -51,9 +51,11 @@ export const CardMovie = ({movie, movieIndex}) => {
       <div className="movies-card">
           <div className='movies-card__image' style={{backgroundImage: `url(${urlPoster})`}}></div>
           <div className='movies-card__name'>
-            {nameMovie}  
-            <FontAwesomeIcon icon={faPlus} className="iconPlus" onClick={() => dispatch(activatedModal(movie.id))}/> 
-            <FontAwesomeIcon icon={faHeart} className={toggleIcon} onClick={(e) => clickOnHeart(e.target.closest("svg").classList[2]) } />
+            <div className='movies-card__name-title'>{nameMovie}</div>
+            <div className='movies-card__name-icons d-flex'>
+              <FontAwesomeIcon icon={faPlus} className="iconPlus" style={{ marginRight: '10px' }} onClick={() => dispatch(activatedModal(movie.id))}/> 
+              <FontAwesomeIcon icon={faHeart} className={toggleIcon} onClick={(e) => clickOnHeart(e.target.closest("svg").classList[2]) } />
+            </div>
           </div>
       </div>
     </>

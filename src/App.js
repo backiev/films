@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from "react-router-dom";
-import { Header } from './components/Header';
+import { Footer } from './modules/Footer';
+import { Header } from './modules/Header';
 
 
 import './sass/main.sass'
@@ -12,6 +13,7 @@ function App() {
     <>
       <Header />
       <Outlet />
+      <Footer />
     </>
   );
 }

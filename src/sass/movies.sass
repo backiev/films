@@ -18,7 +18,12 @@
             display: flex
             justify-content: space-between
             padding: 20px 15px
-            align-items: center 
+            // align-items: center 
+            &-title
+                text-overflow: ellipsis
+                max-width: 70%
+            &-icons 
+                margin-top: 4px
 
         .iconHeartRed 
             color: red
@@ -32,16 +37,31 @@
         background: #222
         padding: 15px
         margin: 15px 0
+        &__title
+            font-size: 18px
+        &__buttons
+            display: flex
+            margin-top: 20px
+        &__year
+            margin-right: 24px
+            &-title
+                margin-right: 6px
+        &__type
+            &-title
+                margin-right: 6px
     &-pag 
         display: flex
         align-items: center
         justify-content: center
         gap: 15px
         
-        li
-            list-style: none
         &__link
             cursor: pointer
+            border: 1px solid #fff
+            padding: 5px
+            min-width: 16px
+            text-align: center
+            border-radius: 8px 
             // margin: 0 auto
 .iconPlus
     cursor: pointer

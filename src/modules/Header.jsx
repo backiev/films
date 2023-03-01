@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-
 
 export const Header = () => {
     const currentLink = useLocation().pathname;
