@@ -6,9 +6,28 @@ import { Link } from "react-router-dom";
 export const  Lists = () => {
     const lists = useSelector(state => state.lists.lists);
     const [filter, setFilter] = useState({
-        byWhat: 'index'
+        byWhat: 'index',
     });
 
+
+    // Сортировка по фильтру
+    const sortByName = (a, b, currentFilter) => {
+        if (currentFilter === 'index') {
+            return;
+        } else if (currentFilter === 'name') {
+            const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
+        } else if (currentFilter === 'count') {
+            return b.count - a.count;
+        }
+    }
 
     return (
         <div className='lists'>
@@ -21,11 +40,15 @@ export const  Lists = () => {
                         <select name="byWhat" id='byWhat' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
                             <option value="index">By Index</option>
                             <option value="count">By Count</option>
+                            <option value="name">By Name</option>
                         </select>
                     </div>
                 </div>
                 <div className="lists-list">
-                    {lists.map(list => <Link to={`/yourlist/${list.index}`} className="movies-card" key={list.index}><ListMovie key={list.index} list={list} /></Link>)}
+
+                    {[...lists]
+                        .sort((a, b) => sortByName(a, b, filter.byWhat))
+                        .map(list => <Link to={`/yourlist/${list.index}`} className="movies-card" key={list.index}><ListMovie key={list.index} list={list} /></Link>)}
                 </div>
             </div>
         </div>

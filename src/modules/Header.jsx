@@ -1,14 +1,7 @@
 import React from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
-    const currentLink = useLocation().pathname;
-    const submitHandler = () => {
-        if (currentLink === "/") {
-            console.log(123);
-        }
-        
-    }
 
   return (
     <div className='header'>
@@ -20,9 +13,6 @@ export const Header = () => {
                     <div className="header__list-item"><Link to="/lists">Lists</Link></div>
                 </div>
             </div>
-            {/* <div className="header-right">
-                <div className="header-profile"><FontAwesomeIcon icon={faUser} /></div>
-            </div> */}
         </div>
     </div>
   )

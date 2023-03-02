@@ -13,6 +13,9 @@ export const YourList = () => {
 
     const listId = useParams().listId;
     const listValue = useSelector(state => state.lists.lists[listId].value);
+
+    console.log(listValue);
+
     // const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         byWhat: 'yourOwn'
@@ -45,15 +48,7 @@ export const YourList = () => {
                     </div>
                     <div className='yourList-filter__title'>Filters</div>
                     <div className="yourList-filter__year">
-                        <div className='yourList-filter__labels'>
-                            <label htmlFor="year" className='yourList-filter__label'>Year</label>
-
-                            <select name="" id='year' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
-                                <option value="date">By Date</option>
-                                <option value="rating">By Rating</option>
-                                <option value="yourOwn">By Your Own opinion</option>
-                            </select>
-                        </div>
+                        <div className='yourList-filter__labels'>Edit your list somehow u want</div>
                         <button className='button' onClick={() => editMode ? setEditMode(false) : setEditMode(true)}>Edit</button>
                     </div>
                 </div>

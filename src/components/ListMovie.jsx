@@ -7,6 +7,7 @@ export const ListMovie = ({list}) => {
   let lastMovieAdded;
   const urlPoster = '/img/woman.jpg';
 
+  // console.log(listMovies);
 
   if (listMovies[0]) lastMovieAdded = listMovies[listMovies.length-1];
 

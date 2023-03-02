@@ -5,8 +5,9 @@ const listsSlice = createSlice({
     name: 'lists',
     initialState: {
         lists: [
-            {index: 0, name: 'second', value: [4532097, 4381953, 1451292, 4633578]},
-            {index: 1, name: 's1', value: [4532097, 4381953, 1451292, 4633578]},
+            {index: 0, name: 'second', value: [4532097, 4381953, 1451292, 4633578], count: 4},
+            {index: 1, name: 's1', value: [4532097, 4381953, 1451292, 4633578, 1268791], count: 5},
+            {index: 2, name: 's2', value: [4532097, 4381953, 1451292, 4633578, 1268791, 4346060], count: 6},
         ]
     },
     reducers: {

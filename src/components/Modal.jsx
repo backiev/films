@@ -16,8 +16,12 @@ export const Modal = () => {
     const isActivated = useSelector(state => state.modal.modalActive.active);
     const idFilm = useSelector(state => state.modal.modalActive.idFilm);
 
+    console.log(inputValue);
+
     const createNewList = () => {
-        dispatch(createList(inputValue))
+        const newInputValue = inputValue.trim();
+        dispatch(createList(newInputValue));
+        setInputValue('');
     } 
    
     const addToPickedList = () => {

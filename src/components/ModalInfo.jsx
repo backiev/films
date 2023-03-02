@@ -18,7 +18,7 @@ export const Modalinfo = ({active, setActive}) => {
                     <div><span className='modal__info-main-title'>Altrernative Name:</span> {movie.alternativeName}</div>
                     <div><span className='modal__info-main-title'>Year:</span> {movie.year}</div>
                     <div><span className='modal__info-main-title'>Rating:</span> {movie.rating ? movie.rating.kp : ''}/10</div>
-                    <div><span className='modal__info-main-title'>Votes:</span> {movie.votes.kp ? movie.votes.kp : ' '}</div>
+                    <div><span className='modal__info-main-title'>Votes:</span> {movie.votes ? movie.votes.kp : ' '}</div>
                     <div><span className='modal__info-main-title'>Description:</span> {movie.description}</div>
                 </div>
             </div>
