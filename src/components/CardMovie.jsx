@@ -8,28 +8,33 @@ import { activatedModal } from '../app/ModalSlice';
 import { addToLastList, removeFromList } from '../app/ListsSlice';
 
 
-export const CardMovie = ({movie, movieIndex, setActive}) => {
+export const CardMovie = ({movie, movieIndex, setActiveInfo, setActiveLists}) => {
   
 
   const dispatch = useDispatch();
   const countLists = useSelector(state => state.lists.lists.length);
   const lists = useSelector(state => state.lists.lists);
 
-
-
-  // Делаем один массив из всех избранных фильмов
-  let allIdFilmsFromLists = [];
-  lists.map(item => allIdFilmsFromLists.push(item.value));
-
+  //? IMG
   const urlPoster = movie.poster ? movie.poster.url : '/img/woman.jpg';
   //alternativeName
   const nameMovie = movie.name ? movie.name : movie.alternativeName;
 
+
+
+  //* Делаем один массив из всех избранных фильмов
+  const allFavFilms = [];
+  lists.map(item => item.value.find(movieItem => movieItem === movie.id) 
+    ? allFavFilms.push(true) 
+    : allFavFilms.push(false));
+
   // Проверяем является ли фильм избранным
-  const firstIcon = allIdFilmsFromLists.flat().find(item => item === movie.id);
-  const firstFirstIcon = firstIcon ? "iconHeartRed" : "iconHeartWhite";
+  // console.log(allFavFilms);
+  // const firstIcon = allFavFilms.flat().find(item => item === movie.id);
+  const firstFirstIcon = allFavFilms.find(item => item === true) ? "iconHeartRed" : "iconHeartWhite";
 
   const [toggleIcon, setToggleIcon] = useState(firstFirstIcon);
+
 
 
 
@@ -38,13 +43,13 @@ export const CardMovie = ({movie, movieIndex, setActive}) => {
     if (target === "iconHeartWhite") {
       // проверка есть ли вообще листы у пользователя
       if (!countLists) {
-        dispatch(activatedModal(movie.id));
+        setActiveLists({visible: true, movieInfo: movie, allFavFilms: allFavFilms})
       } else {
         dispatch(addToLastList(movie.id));
       }
       setToggleIcon("iconHeartRed");
     } else {
-      allIdFilmsFromLists.map((item, index) => (
+      allFavFilms.map((item, index) => (
         item.map((e, indexE) => e === movie.id ? dispatch(removeFromList({indexList: index, idMovie: indexE})) : "")
       ));
       setToggleIcon("iconHeartWhite");
@@ -57,8 +62,8 @@ export const CardMovie = ({movie, movieIndex, setActive}) => {
           <div className='movies-card__name'>
             <div className='movies-card__name-title'>{nameMovie}</div>
             <div className='movies-card__name-icons'>
-              <FontAwesomeIcon icon={faCircleInfo} className="iconInfo" onClick={() => setActive({visible: true, movieInfo: movie})}/>
-              <FontAwesomeIcon icon={faPlus} className="iconPlus" onClick={() => dispatch(activatedModal(movie.id))}/> 
+              <FontAwesomeIcon icon={faCircleInfo} className="iconInfo" onClick={() => setActiveInfo({visible: true, movieInfo: movie})}/>
+              <FontAwesomeIcon icon={faPlus} className="iconPlus" onClick={() => setActiveLists({visible: true, movieInfo: movie, allFavFilms: allFavFilms})}/> 
               <FontAwesomeIcon icon={faHeart} className={toggleIcon} onClick={(e) => clickOnHeart(e.target.closest("svg").classList[2]) } />
             </div>
           </div>

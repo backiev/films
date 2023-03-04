@@ -14,8 +14,6 @@ export const YourList = () => {
     const listId = useParams().listId;
     const listValue = useSelector(state => state.lists.lists[listId].value);
 
-    console.log(listValue);
-
     // const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         byWhat: 'yourOwn'

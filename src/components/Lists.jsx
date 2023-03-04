@@ -25,7 +25,7 @@ export const  Lists = () => {
             }
             return 0;
         } else if (currentFilter === 'count') {
-            return b.count - a.count;
+            return b.value.length - a.value.length;
         }
     }
 

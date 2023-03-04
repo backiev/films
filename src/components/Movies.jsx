@@ -16,8 +16,15 @@ export const Movies = () => {
         rating: "7-10"
     });
     
+    // Модальное окно для добавления листа
+    const [activeLists, setActiveLists] = useState({
+        visible: false,
+        movieInfo: {},
+        allFavFilms: [false],
+    });
+
     // Модальное окно для информации фильма
-    const [active, setActive] = useState({
+    const [activeInfo, setActiveInfo] = useState({
         visible: false,
         movieInfo: {},
     });
@@ -76,7 +83,7 @@ export const Movies = () => {
             </div>
             <div className="movies-list">
 
-                {arrMovies.map((movie, index) => <CardMovie key={movie.id} movie={movie} movieIndex={index} setActive={setActive}/>)}
+                {arrMovies.map((movie, index) => <CardMovie key={movie.id} movie={movie} movieIndex={index} setActiveInfo={setActiveInfo} setActiveLists={setActiveLists}/>)}
 
             </div>
             <ul className="movies-pag">
@@ -96,8 +103,8 @@ export const Movies = () => {
             </ul>
         </div>
     </div>
-    <Modalinfo active={active} setActive={setActive} />
-    <Modal />
+    <Modalinfo activeInfo={activeInfo} setActiveInfo={setActiveInfo} />
+    <Modal activeLists={activeLists} setActiveLists={setActiveLists} />
     </>
   )
 }

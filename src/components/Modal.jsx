@@ -1,22 +1,28 @@
 import React from 'react'
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createList, addToList } from '../app/ListsSlice';
-import { disActivatedModal, clearIdFilm} from '../app/ModalSlice';
+import { createList, addToList, removeFromList } from '../app/ListsSlice';
 
 import { ModalItem } from './ModalItem';
 
-export const Modal = () => {
+export const Modal = ({activeLists, setActiveLists}) => {
+
+    const closeModal = () => {
+        setActiveLists({
+            visible: false,
+            movieInfo: {},
+            allFavFilms: [],
+        });
+    }
+    const idFilm = activeLists.movieInfo.id;
+    const favFilms = activeLists.allFavFilms;
 
     const [inputValue, setInputValue] = useState('');
-    const [checkedList, setCheckedList] = useState(1);
+    const [checkedList, setCheckedList] = useState([...favFilms]);
     const lists = useSelector(state => state.lists.lists);
     const dispatch = useDispatch();
-    const isActivated = useSelector(state => state.modal.modalActive.active);
-    const idFilm = useSelector(state => state.modal.modalActive.idFilm);
 
-    console.log(inputValue);
 
     const createNewList = () => {
         const newInputValue = inputValue.trim();
@@ -24,21 +30,40 @@ export const Modal = () => {
         setInputValue('');
     } 
    
-    const addToPickedList = () => {
+
+    const addToPickedList = (index) => {
+        dispatch(addToList({idList: index, idFilm: idFilm}));
+    }
+    const removeFromPickedList = (index) => {
+        dispatch(removeFromList({idList: index, idFilm: idFilm}));
+    }
+
+    const submitButton = () => {
         if (idFilm >= 0) {
-            dispatch(addToList({idList: checkedList, idFilm: idFilm}));
-            dispatch(clearIdFilm());
-            dispatch(disActivatedModal());
+            // массив из избранных фильмов до нажатия на чекбокс
+            const allFavFilms = [];
+            lists.map(item => item.value.find(movieItem => movieItem === idFilm) 
+                ? allFavFilms.push(true) 
+                : allFavFilms.push(false));
+
+            // проверка на какие именно нажал чекбоксы пользователь
+            for(let i = 0; i < lists.length; i++) {
+                if (checkedList[i] === true && allFavFilms[i] === false) {
+                    addToPickedList(i);
+                }
+                if (checkedList[i] === false && allFavFilms[i] === true) {
+                    removeFromPickedList(i);
+                }
+            }
         }
     }
-
-    const closeModal = () => {
-        dispatch(disActivatedModal());
-    }
-
+    useEffect(() => {
+        setCheckedList([...favFilms])
+    }, [activeLists]);
+    
     return (
-        <div className={isActivated ? "modal active" : "modal"} onClick={closeModal}>
-            <div className={isActivated ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
+        <div className={activeLists.visible ? "modal active" : "modal"} onClick={closeModal}>
+            <div className={activeLists.visible ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
                 <div className="modal__content-title">Which list do u prefer?</div>
                 <div className="modal__content-button">
                     <div className='modal__content-title__block'>Create new List</div>
@@ -48,9 +73,11 @@ export const Modal = () => {
                 <div className="modal__content-list">
                     <div className='modal__content-title__block'>Current Lists</div>
                     <div className='modal__content-currentLists'>
-                    {lists.map(item => <ModalItem item={item} key={item.index} checkedItem={checkedList} setCheckedItem={setCheckedList} />)}
+                        {lists.map((item, index) => 
+                                <ModalItem item={item} key={item.index} checkedList={checkedList} setCheckedList={setCheckedList} index={index} />
+                        )}
                     </div>
-                    <button onClick={() => addToPickedList() } className="modal-button">Add to this list</button>
+                    <button onClick={() => submitButton() } className="modal-button">Add to this list</button>
                 </div>
             </div>
         </div>
