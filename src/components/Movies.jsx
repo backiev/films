@@ -29,6 +29,9 @@ export const Movies = () => {
         movieInfo: {},
     });
 
+    // Иконки сердца на карточке фильма
+    const [iconsHurts, setIconsHurts] = useState([]);
+
     const filterSort = (pageItem, value) => {
         return { year: filter.year, type: filter.type, page: pageItem + value, rating: filter.rating };
     }
@@ -83,7 +86,16 @@ export const Movies = () => {
             </div>
             <div className="movies-list">
 
-                {arrMovies.map((movie, index) => <CardMovie key={movie.id} movie={movie} movieIndex={index} setActiveInfo={setActiveInfo} setActiveLists={setActiveLists}/>)}
+                {arrMovies.map((movie) => 
+                    <CardMovie 
+                        key={movie.id} 
+                        movie={movie}
+                        setActiveInfo={setActiveInfo}
+                        setActiveLists={setActiveLists}
+                        iconsHurts={iconsHurts}
+                        setIconsHurts={setIconsHurts}
+                    />
+                )}
 
             </div>
             <ul className="movies-pag">

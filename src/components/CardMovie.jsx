@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { activatedModal } from '../app/ModalSlice';
 import { addToLastList, removeFromList } from '../app/ListsSlice';
+import { useEffect } from 'react';
 
 
-export const CardMovie = ({movie, movieIndex, setActiveInfo, setActiveLists}) => {
+export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, setIconsHurts}) => {
   
 
   const dispatch = useDispatch();
@@ -27,13 +27,11 @@ export const CardMovie = ({movie, movieIndex, setActiveInfo, setActiveLists}) =>
   lists.map(item => item.value.find(movieItem => movieItem === movie.id) 
     ? allFavFilms.push(true) 
     : allFavFilms.push(false));
-
-  // Проверяем является ли фильм избранным
   // console.log(allFavFilms);
-  // const firstIcon = allFavFilms.flat().find(item => item === movie.id);
-  const firstFirstIcon = allFavFilms.find(item => item === true) ? "iconHeartRed" : "iconHeartWhite";
+  // setIconsHurts(allFavFilms);
+  const firstIcon = allFavFilms.find(item => item === true) ? "iconHeartRed" : "iconHeartWhite";
 
-  const [toggleIcon, setToggleIcon] = useState(firstFirstIcon);
+  const [toggleIcon, setToggleIcon] = useState(firstIcon);
 
 
 
@@ -49,12 +47,28 @@ export const CardMovie = ({movie, movieIndex, setActiveInfo, setActiveLists}) =>
       }
       setToggleIcon("iconHeartRed");
     } else {
-      allFavFilms.map((item, index) => (
-        item.map((e, indexE) => e === movie.id ? dispatch(removeFromList({indexList: index, idMovie: indexE})) : "")
-      ));
+
+      // Индекс последнего листа избранного фильма
+      let lastFavList = 0;
+      for(let i = 0; i <= allFavFilms.length; i++) {
+        if (allFavFilms[i] === true) {
+          lastFavList = i;
+        }
+      }
+
+      // Индекс избранного фильма в листе
+      const indexMovieInList = lists[lastFavList].value.indexOf(movie.id);
+
+      dispatch(removeFromList({idList: lastFavList, idMovie: indexMovieInList}))
+
       setToggleIcon("iconHeartWhite");
     }
   }
+
+  // useEffect(() => {
+  //   // setIconsHurts([...allFavFilms]);
+  // }, [iconsHurts]);
+
   return (
     <>
       <div className="movies-card">

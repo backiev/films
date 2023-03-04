@@ -35,7 +35,8 @@ export const Modal = ({activeLists, setActiveLists}) => {
         dispatch(addToList({idList: index, idFilm: idFilm}));
     }
     const removeFromPickedList = (index) => {
-        dispatch(removeFromList({idList: index, idFilm: idFilm}));
+        const indexMovieInList = lists[index].value.indexOf(idFilm);
+        dispatch(removeFromList({idList: index, idMovie: indexMovieInList}));
     }
 
     const submitButton = () => {
@@ -55,6 +56,7 @@ export const Modal = ({activeLists, setActiveLists}) => {
                     removeFromPickedList(i);
                 }
             }
+            closeModal();
         }
     }
     useEffect(() => {
