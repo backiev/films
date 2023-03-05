@@ -27,13 +27,13 @@ export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, set
   lists.map(item => item.value.find(movieItem => movieItem === movie.id) 
     ? allFavFilms.push(true) 
     : allFavFilms.push(false));
-  // console.log(allFavFilms);
-  // setIconsHurts(allFavFilms);
-  const firstIcon = allFavFilms.find(item => item === true) ? "iconHeartRed" : "iconHeartWhite";
+
+  
+  const firstIcon = iconsHurts.find(item => item === movie.id) ? "iconHeartRed" : "iconHeartWhite";
 
   const [toggleIcon, setToggleIcon] = useState(firstIcon);
 
-
+  // console.log(iconsHurts);
 
 
   // FIX: рендер сердечек при нажатии на листы
@@ -45,7 +45,9 @@ export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, set
       } else {
         dispatch(addToLastList(movie.id));
       }
+      // Иконка сердца меняет класс и меняется массив в State в компоненте Movies
       setToggleIcon("iconHeartRed");
+      setIconsHurts([...iconsHurts, movie.id]);
     } else {
 
       // Индекс последнего листа избранного фильма
@@ -61,13 +63,20 @@ export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, set
 
       dispatch(removeFromList({idList: lastFavList, idMovie: indexMovieInList}))
 
+
+      // Иконка сердца меняет класс и меняется массив в State в компоненте Movies
       setToggleIcon("iconHeartWhite");
+      let lastHurt = 0;
+      for(let i = 0; i <= iconsHurts.length; i++) {
+        if (iconsHurts[i] === movie.id) {
+          lastHurt = i;
+          // return;
+        }
+      }
+      // setIconsHurts([...iconsHurts.splice(lastHurt,1)]);
+      // console.log(lastHurt,iconsHurts, iconsHurts.splice(lastHurt, 1));
     }
   }
-
-  // useEffect(() => {
-  //   // setIconsHurts([...allFavFilms]);
-  // }, [iconsHurts]);
 
   return (
     <>
@@ -77,7 +86,7 @@ export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, set
             <div className='movies-card__name-title'>{nameMovie}</div>
             <div className='movies-card__name-icons'>
               <FontAwesomeIcon icon={faCircleInfo} className="iconInfo" onClick={() => setActiveInfo({visible: true, movieInfo: movie})}/>
-              <FontAwesomeIcon icon={faPlus} className="iconPlus" onClick={() => setActiveLists({visible: true, movieInfo: movie, allFavFilms: allFavFilms})}/> 
+              <FontAwesomeIcon icon={faPlus} className="iconPlus" onClick={() => setActiveLists({visible: true, movieInfo: movie, allFavFilms: [...allFavFilms]})}/> 
               <FontAwesomeIcon icon={faHeart} className={toggleIcon} onClick={(e) => clickOnHeart(e.target.closest("svg").classList[2]) } />
             </div>
           </div>

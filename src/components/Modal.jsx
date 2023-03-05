@@ -6,7 +6,7 @@ import { createList, addToList, removeFromList } from '../app/ListsSlice';
 
 import { ModalItem } from './ModalItem';
 
-export const Modal = ({activeLists, setActiveLists}) => {
+export const Modal = ({activeLists, setActiveLists, iconsHurts, setIconsHurts}) => {
 
     const closeModal = () => {
         setActiveLists({
@@ -19,7 +19,7 @@ export const Modal = ({activeLists, setActiveLists}) => {
     const favFilms = activeLists.allFavFilms;
 
     const [inputValue, setInputValue] = useState('');
-    const [checkedList, setCheckedList] = useState([...favFilms]);
+    const [checkedList, setCheckedList] = useState([]);
     const lists = useSelector(state => state.lists.lists);
     const dispatch = useDispatch();
 
@@ -51,12 +51,14 @@ export const Modal = ({activeLists, setActiveLists}) => {
             for(let i = 0; i < lists.length; i++) {
                 if (checkedList[i] === true && allFavFilms[i] === false) {
                     addToPickedList(i);
+                    setIconsHurts([...iconsHurts, idFilm]);
                 }
                 if (checkedList[i] === false && allFavFilms[i] === true) {
                     removeFromPickedList(i);
                 }
             }
             closeModal();
+            
         }
     }
     useEffect(() => {

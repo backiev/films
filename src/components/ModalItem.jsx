@@ -2,8 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 
 export const ModalItem = ({item, checkedList, setCheckedList, index}) => {
-  // const [checkbox, setCheckbox] = useState(checked);
-  // console.log(checked, checkbox);
 
   const toggleCheckBox = (list, id) => {
     return list.map((item, index) => index === id ? !item : item);
@@ -13,8 +11,8 @@ export const ModalItem = ({item, checkedList, setCheckedList, index}) => {
     <div className="modal__content-list__item">
         <input type="checkbox" id={`contactChoice${item.index}`} className="modal__content-list__item-input" 
           name='contact'
-          value={item.name}
-          checked={checkedList[index]}
+          value={item.name || ' '}
+          checked={checkedList[index] || false} // Если не успеют прогрузиться стейты - будет false
           onChange={() => setCheckedList(toggleCheckBox(checkedList, index))}
         />
         <label htmlFor={`contactChoice${item.index}`} className="modal__content-list__item-label">{item.name}</label>

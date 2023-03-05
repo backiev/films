@@ -6,8 +6,13 @@ import { getMovies } from '../api/api';
 import { Modal } from './Modal';
 import { Modalinfo } from './ModalInfo';
 
+import { useSelector } from 'react-redux';
+
+
 
 export const Movies = () => {
+    const lists = useSelector(state => state.lists.lists);
+
     const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
         year: "2020-2023",
@@ -20,7 +25,8 @@ export const Movies = () => {
     const [activeLists, setActiveLists] = useState({
         visible: false,
         movieInfo: {},
-        allFavFilms: [false],
+        allFavFilms: [],
+
     });
 
     // Модальное окно для информации фильма
@@ -30,7 +36,9 @@ export const Movies = () => {
     });
 
     // Иконки сердца на карточке фильма
-    const [iconsHurts, setIconsHurts] = useState([]);
+    const hurtsArray = [];
+    lists.map(item => item.value.map(movieIndex => hurtsArray.push(movieIndex)));
+    const [iconsHurts, setIconsHurts] = useState([...new Set(hurtsArray)]);
 
     const filterSort = (pageItem, value) => {
         return { year: filter.year, type: filter.type, page: pageItem + value, rating: filter.rating };
@@ -116,7 +124,7 @@ export const Movies = () => {
         </div>
     </div>
     <Modalinfo activeInfo={activeInfo} setActiveInfo={setActiveInfo} />
-    <Modal activeLists={activeLists} setActiveLists={setActiveLists} />
+    <Modal activeLists={activeLists} setActiveLists={setActiveLists} iconsHurts={iconsHurts} setIconsHurts={setIconsHurts}/>
     </>
   )
 }
