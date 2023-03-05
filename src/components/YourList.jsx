@@ -9,6 +9,10 @@ import { Link } from "react-router-dom";
 
 export const YourList = () => {
     
+    const [editMode, setEditMode] = useState(false);
+    const [currentMovie, setCurrentMovie] = useState(null);
+    const [deleted, setDeleted] = useState(false);
+
     const dispatch = useDispatch();
 
     const location = useLocation();
@@ -17,14 +21,9 @@ export const YourList = () => {
     const listId = useParams().listId;
     const listItem = useSelector(state => state.lists.lists[listId]);
     const listValue = listItem.value;
+    // console.log(listItem[4], listValue);
 
-    // const [arrMovies, setArrMovies] = useState([]);
-    // const [filter, setFilter] = useState({
-    //     byWhat: 'yourOwn'
-    // });
-    const [editMode, setEditMode] = useState(false);
-    const [currentMovie, setCurrentMovie] = useState(null);
-    const [deleted, setDeleted] = useState(false);
+
 
     const dragStartHandler = (e, idMovie) => {
         if (editMode) setCurrentMovie(idMovie);
@@ -65,7 +64,8 @@ export const YourList = () => {
                     </div>
                 </div>
                 <div className={`yourList-list ${editMode ? "edit" : ""}`}>
-                    {listValue.map((element, index) => <CardList 
+                    {listValue.length > 0
+                        ? listValue.map((element, index) => <CardList 
                         key={element} 
                         id={element}
                         listId={listId}
@@ -75,10 +75,13 @@ export const YourList = () => {
                         dragOverHandler={dragOverHandler}
                         dropHandler={dropHandler}
                         editMode={editMode}
-                        />)}
+                        />)
+                        : <span style={{textAlign: 'center', fontSize: '18px', fontWeight: 'bold'}}>Empty list</span>
+                    }
                 </div>
             </div>
             {deleted ? <Navigate to="/lists" replace state={{from: location, listId: listId}}/> : ' '}
+            {/* {error ? <Navigate to="/lists" replace state={{from: location}}/> : ' '} */}
         </div>
     )
 }
