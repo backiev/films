@@ -63,7 +63,7 @@ export const Modal = ({activeLists, setActiveLists, iconsHurts, setIconsHurts}) 
         }
     }
     useEffect(() => {
-        setCheckedList([...favFilms])
+        setCheckedList([...favFilms]);
     }, [activeLists]);
     
     return (

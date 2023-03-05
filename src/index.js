@@ -6,7 +6,7 @@ import {
 
 import { Movies } from './components/Movies';
 import { Lists } from './components/Lists';
-import { YourList, loader as listLoader } from './components/YourList';
+import { YourList } from './components/YourList';
 import { Error } from './modules/Error';
 
 
@@ -36,12 +36,10 @@ const router = createBrowserRouter([
         path: "yourlist/:listId",
         element: <YourList />,
         errorElement: <Error />
-        // loader: listLoader,
       },
       {
         path: "*",
         element: <Error />,
-        // loader: listLoader,
       },
     ],
   },

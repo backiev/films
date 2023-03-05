@@ -25,7 +25,6 @@ const listsSlice = createSlice({
         },
         removeList: (state, action) => {
             state.lists.splice(action.payload, 1);
-            console.log(123);
         },
         dragDrop: (state, action) => {
             const currentList = state.lists[action.payload.indexList];
@@ -35,10 +34,11 @@ const listsSlice = createSlice({
                 if (e === idMovie) {
                     const newListValue = currentList.value.splice(index, 1, currentIdMovie);
                     return {...currentList, value: newListValue};
-                }
-                if (e === currentIdMovie) {
+                } else if (e === currentIdMovie) {
                     const newListValue = currentList.value.splice(index, 1, idMovie);
                     return {...currentList, value: newListValue};
+                } else {
+                    return;
                 }
             });
         }

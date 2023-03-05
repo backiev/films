@@ -5,7 +5,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { addToLastList, removeFromList } from '../app/ListsSlice';
-import { useEffect } from 'react';
 
 
 export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, setIconsHurts}) => {
@@ -62,19 +61,7 @@ export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, set
       const indexMovieInList = lists[lastFavList].value.indexOf(movie.id);
 
       dispatch(removeFromList({idList: lastFavList, idMovie: indexMovieInList}))
-
-
-      // Иконка сердца меняет класс и меняется массив в State в компоненте Movies
       setToggleIcon("iconHeartWhite");
-      let lastHurt = 0;
-      for(let i = 0; i <= iconsHurts.length; i++) {
-        if (iconsHurts[i] === movie.id) {
-          lastHurt = i;
-          // return;
-        }
-      }
-      // setIconsHurts([...iconsHurts.splice(lastHurt,1)]);
-      // console.log(lastHurt,iconsHurts, iconsHurts.splice(lastHurt, 1));
     }
   }
 

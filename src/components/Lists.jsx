@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ListMovie } from './ListMovie';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeList } from '../app/ListsSlice';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const  Lists = () => {
     const lists = useSelector(state => state.lists.lists);
@@ -12,7 +12,6 @@ export const  Lists = () => {
 
     const location = useLocation();
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
 
 
     // Сортировка по фильтру
@@ -39,7 +38,7 @@ export const  Lists = () => {
         if (location.state?.from && location.state.listId) {
             dispatch(removeList(location.state.listId));
         }
-    }, [])
+    })
     
 
     return (

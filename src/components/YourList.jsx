@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { dragDrop, removeList } from '../app/ListsSlice';
-import { useParams, redirect, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { dragDrop } from '../app/ListsSlice';
+import { useParams, useLocation, Navigate } from "react-router-dom";
 import { CardList } from './CardList';
 import { Link } from "react-router-dom";
 

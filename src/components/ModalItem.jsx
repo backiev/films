@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
 
 export const ModalItem = ({item, checkedList, setCheckedList, index}) => {
 
