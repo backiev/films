@@ -26,15 +26,15 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <Movies />,
       },
       {
-        path: "lists",
+        path: "/lists",
         element: <Lists />,
       },
       {
-        path: "yourlist/:listId",
+        path: "/yourlist/:listId",
         element: <YourList />,
         errorElement: <Error />
       },

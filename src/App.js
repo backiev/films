@@ -8,8 +8,6 @@ import './sass/main.sass'
 
 
 function App() {
-  let error = useRouteError();
-  console.error(error);
   return (
     <>
       <Header />
