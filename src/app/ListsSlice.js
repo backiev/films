@@ -5,9 +5,9 @@ const listsSlice = createSlice({
     name: 'lists',
     initialState: {
         lists: [
-            {index: 0, name: 'second', value: [4532097, 4381953, 1451292, 4633578]},
-            {index: 1, name: 's1', value: [4532097, 4381953, 1451292, 4633578, 1268791]},
-            {index: 2, name: 's2', value: [4532097, 4381953, 1451292, 4633578, 1268791, 4346060]},
+            {index: 0, name: 'Любимые фильмы', value: [4532097, 4381953, 1451292, 4633578]},
+            {index: 1, name: 'Самые плохие фильмы', value: [4532097, 4381953, 1451292, 4633578, 1268791]},
+            {index: 2, name: 'Фильмы 2022', value: [4532097, 4381953, 1451292, 4633578, 1268791, 4346060]},
         ]
     },
     reducers: {
@@ -22,6 +22,10 @@ const listsSlice = createSlice({
         },
         removeFromList: (state, action) => {
             state.lists[action.payload.idList].value.splice(action.payload.idMovie, 1);
+        },
+        removeList: (state, action) => {
+            state.lists.splice(action.payload, 1);
+            console.log(123);
         },
         dragDrop: (state, action) => {
             const currentList = state.lists[action.payload.indexList];
@@ -41,6 +45,6 @@ const listsSlice = createSlice({
     }
 });
 
-export const {createList, addToList, addToLastList, removeFromList, dragDrop} = listsSlice.actions;
+export const {createList, addToList, addToLastList, removeFromList, removeList, dragDrop} = listsSlice.actions;
 
 export default listsSlice.reducer;

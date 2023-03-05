@@ -17,6 +17,10 @@ export const CardList = ({id, index, listId, editMode, dragStartHandler, dragEnd
     getMovie({id: id}, setLoadedMovie, setImageMovie);
   }, []);
 
+  const removeMovieFromList = () => {
+    dispatch(removeFromList({idList: listId, idMovie: index}));
+  }
+
   return (
     <div className='yourList-block' 
       draggable={(editMode)}
@@ -31,7 +35,7 @@ export const CardList = ({id, index, listId, editMode, dragStartHandler, dragEnd
           <div className='yourList-card__image' style={{backgroundImage: `url(${imageMovie})`}}></div>
           <div className='yourList-card__name'>
             {loadedMovie.name}
-            <button className="yourList-delete" onClick={() => dispatch(removeFromList({indexList: listId, idMovie: index}))}>Delete</button>
+            <button className="yourList-delete" onClick={() => removeMovieFromList()}>Delete</button>
           </div>
       </div>
       <div className="yourList-number">{index + 1}</div>

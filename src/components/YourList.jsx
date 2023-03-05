@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { dragDrop } from '../app/ListsSlice';
-import { useParams } from "react-router-dom";
+import { dragDrop, removeList } from '../app/ListsSlice';
+import { useParams, redirect, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { CardList } from './CardList';
 import { Link } from "react-router-dom";
 
@@ -11,15 +11,20 @@ export const YourList = () => {
     
     const dispatch = useDispatch();
 
+    const location = useLocation();
+
+
     const listId = useParams().listId;
-    const listValue = useSelector(state => state.lists.lists[listId].value);
+    const listItem = useSelector(state => state.lists.lists[listId]);
+    const listValue = listItem.value;
 
     // const [arrMovies, setArrMovies] = useState([]);
-    const [filter, setFilter] = useState({
-        byWhat: 'yourOwn'
-    });
+    // const [filter, setFilter] = useState({
+    //     byWhat: 'yourOwn'
+    // });
     const [editMode, setEditMode] = useState(false);
     const [currentMovie, setCurrentMovie] = useState(null);
+    const [deleted, setDeleted] = useState(false);
 
     const dragStartHandler = (e, idMovie) => {
         if (editMode) setCurrentMovie(idMovie);
@@ -36,10 +41,16 @@ export const YourList = () => {
         if (editMode) dispatch(dragDrop({indexList: listId, currentMovie: currentMovie, idMovie: idMovie}));
     }
 
+
+    // Редирект в компонент Lists, там удаление через location
+    const  removeCurrentList =  () => {
+        setDeleted(true);
+    }
+
     return (
         <div className='yourList'>
             <div className="container">
-                <h1 className='yourList-title'>Your list: 'My list'</h1>
+                <h1 className='yourList-title'>Your list: <span style={{textDecoration: 'underline'}}>{listItem.name}</span></h1>
                 <div className='yourList-filter'>
                     <div className='yourList-filter__forwardLink'>
                         <Link to={`/lists`}>Back to Links page</Link>
@@ -47,7 +58,10 @@ export const YourList = () => {
                     <div className='yourList-filter__title'>Filters</div>
                     <div className="yourList-filter__year">
                         <div className='yourList-filter__labels'>Edit your list somehow u want</div>
-                        <button className='button' onClick={() => editMode ? setEditMode(false) : setEditMode(true)}>Edit</button>
+                        <div className='yourList-filter__buttons'>
+                            <button className='button' onClick={() => editMode ? setEditMode(false) : setEditMode(true)}>Edit</button>
+                            <button className='button delete-button' onClick={() => removeCurrentList()}>Delete List</button>
+                        </div>
                     </div>
                 </div>
                 <div className={`yourList-list ${editMode ? "edit" : ""}`}>
@@ -64,6 +78,7 @@ export const YourList = () => {
                         />)}
                 </div>
             </div>
+            {deleted ? <Navigate to="/lists" replace state={{from: location, listId: listId}}/> : ' '}
         </div>
     )
 }
