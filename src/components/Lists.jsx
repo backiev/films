@@ -35,7 +35,7 @@ export const  Lists = () => {
 
     // Если произошел редирект с YourList в Lists - удаление выбранного листа
     useEffect(() => {
-        if (location.state?.from && location.state.listId) {
+        if (location.state?.from) {
             dispatch(removeList(location.state.listId));
         }
     })
