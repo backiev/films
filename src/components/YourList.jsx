@@ -42,7 +42,7 @@ export const YourList = () => {
 
 
     // Редирект в компонент Lists, там удаление через location
-    const  removeCurrentList =  () => {
+    const  removeCurrentList = () => {
         setDeleted(true);
     }
 

@@ -37,8 +37,9 @@ export const  Lists = () => {
     useEffect(() => {
         if (location.state?.from) {
             dispatch(removeList(location.state.listId));
+            window.history.replaceState({}, document.title);
         }
-    })
+    }, [])
     
 
     return (
