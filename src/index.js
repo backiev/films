@@ -20,8 +20,9 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 const router = createBrowserRouter([
+  //process.env.PUBLIC_URL
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <Error />,
     children: [
@@ -43,11 +44,14 @@ const router = createBrowserRouter([
         element: <Error />,
       },
     ],
-  },
-]);
+  }
+],
+{
+  basename: '/films'
+});
 
 root.render(
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} basename="/films"/>
     </Provider>
 );
