@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { dragDrop } from '../app/ListsSlice';
-import { useParams, useLocation, Navigate } from "react-router-dom";
+import { dragDrop, removeList } from '../app/ListsSlice';
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { CardList } from './CardList';
 import { Link } from "react-router-dom";
 
@@ -11,11 +11,12 @@ export const YourList = () => {
     
     const [editMode, setEditMode] = useState(false);
     const [currentMovie, setCurrentMovie] = useState(null);
-    const [deleted, setDeleted] = useState(false);
+    // const [deleted, setDeleted] = useState(false);
 
     const dispatch = useDispatch();
 
     const location = useLocation();
+    const navigate = useNavigate();
 
 
     const listId = useParams().listId;
@@ -43,7 +44,8 @@ export const YourList = () => {
 
     // Редирект в компонент Lists, там удаление через location
     const  removeCurrentList = () => {
-        setDeleted(true);
+        navigate("/lists");
+        dispatch(removeList(listId));
     }
 
     return (
@@ -80,7 +82,7 @@ export const YourList = () => {
                     }
                 </div>
             </div>
-            {deleted ? <Navigate to="/lists" replace state={{from: location, listId: listId}}/> : ' '}
+            {/* {deleted ? <Navigate to="/lists" replace state={{from: location, listId: listId}}/> : ' '} */}
             {/* {error ? <Navigate to="/lists" replace state={{from: location}}/> : ' '} */}
         </div>
     )

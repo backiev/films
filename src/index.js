@@ -52,6 +52,6 @@ const router = createBrowserRouter([
 
 root.render(
     <Provider store={store}>
-      <RouterProvider router={router} basename="/films"/>
+      <RouterProvider router={router}/>
     </Provider>
 );
