@@ -15,12 +15,13 @@ export const YourList = () => {
 
     const dispatch = useDispatch();
 
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
 
 
     const listId = useParams().listId;
-    const listItem = useSelector(state => state.lists.lists[listId]);
+
+    const listItem = useSelector(state => state.lists.lists.find(({index}) => index === parseInt(listId)));
     const listValue = listItem.value;
     // console.log(listItem[4], listValue);
 

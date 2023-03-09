@@ -12,7 +12,7 @@ const listsSlice = createSlice({
     },
     reducers: {
         createList: (state, action) => {
-            state.lists.push({index: state.lists.length, name: action.payload, value: []})
+            state.lists.push({index: parseInt(state.lists[state.lists.length-1].index) + 1, name: action.payload, value: []})
         },
         addToList: (state, action) => {
             state.lists[action.payload.idList].value.push(action.payload.idFilm);

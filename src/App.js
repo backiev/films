@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useRouteError } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Footer } from './modules/Footer';
 import { Header } from './modules/Header';
 

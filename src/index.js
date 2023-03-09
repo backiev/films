@@ -19,32 +19,39 @@ import './index.css';
 const container = document.getElementById('root');
 const root = createRoot(container);
 
+
+
 const router = createBrowserRouter([
-  //process.env.PUBLIC_URL
   {
-    path: '/',
+    path: "/",
     element: <App />,
     errorElement: <Error />,
     children: [
       {
-        path: "/",
-        element: <Movies />,
-      },
-      {
-        path: "/lists",
-        element: <Lists />,
-      },
-      {
-        path: "/yourlist/:listId",
-        element: <YourList />,
-        errorElement: <Error />
-      },
-      {
-        path: "*",
-        element: <Error />,
-      },
+        errorElement: <Error />,
+        children: [
+          {
+            index: true,
+            element: <Movies />,
+          },
+          {
+            path: "lists",
+            element: <Lists />,
+          },
+          {
+            path: "yourlist/:listId",
+            element: <YourList />,
+            errorElement: <Error />
+          },
+          {
+            path: "*",
+            element: <Error />,
+          },
+        ]
+      }
     ],
-  }
+  },
+  
 ],
 {
   basename: '/films'
@@ -52,6 +59,6 @@ const router = createBrowserRouter([
 
 root.render(
     <Provider store={store}>
-      <RouterProvider router={router}/>
+        <RouterProvider router={router}/>
     </Provider>
 );
