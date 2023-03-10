@@ -25,10 +25,14 @@ export const Modal = ({activeLists, setActiveLists, iconsHurts, setIconsHurts}) 
 
 
     const createNewList = () => {
-        const newInputValue = inputValue.trim();
-        dispatch(createList(newInputValue));
-        setCheckedList([...checkedList, false]);
-        setInputValue('');
+        const newInputValue = inputValue.trim().length;
+        if (newInputValue) {
+            dispatch(createList(newInputValue));
+            setCheckedList([...checkedList, false]);
+            setInputValue('');
+        } else {
+            setInputValue('Пустая строка!');
+        }
     } 
    
 
