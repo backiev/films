@@ -1,14 +1,18 @@
 .lists
     &-list
-        display: flex
-        flex-wrap: wrap
-        gap: 30px
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr 
+        gap: 20px
+    @media (max-width: 1100px) 
+        &-list
+            grid-template-columns: 1fr 1fr
+    @media (max-width: 768px) 
+        &-list
+            grid-template-columns: 1fr
     &-card 
-        width: 30%
-        // height: 100px
-        border: 1px solid #000
+        // width: 30%
         border-radius: 15px
-        // z-index: 1000 !important
+        background: #222
         padding: 5px
         &__image
             height: 200px
@@ -17,6 +21,8 @@
             background-repeat: none
         &__name
             background: #222
+        .movies-card 
+            border: none
     &-filter
         background: #222
         padding: 15px

@@ -48,7 +48,7 @@ export const  Lists = () => {
 
                     {[...lists]
                         .sort((a, b) => sortByName(a, b, filter.byWhat))
-                        .map(list => <Link to={`/yourlist/${list.index}`} className="movies-card" key={list.index}><ListMovie key={list.index} list={list} /></Link>)}
+                        .map(list => <Link to={`/yourlist/${list.index}`} className="lists-card" key={list.index}><ListMovie key={list.index} list={list} /></Link>)}
                 </div>
             </div>
         </div>

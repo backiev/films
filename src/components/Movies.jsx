@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { CardMovie } from './CardMovie';
-
 import { getMovies } from '../api/api';
-
 import { Modal } from './Modal';
 import { Modalinfo } from './ModalInfo';
-
 import { useSelector } from 'react-redux';
 
 
@@ -26,7 +23,6 @@ export const Movies = () => {
         visible: false,
         movieInfo: {},
         allFavFilms: [],
-
     });
 
     // Модальное окно для информации фильма
@@ -40,10 +36,12 @@ export const Movies = () => {
     lists.map(item => item.value.map(movieIndex => hurtsArray.push(movieIndex)));
     const [iconsHurts, setIconsHurts] = useState([...new Set(hurtsArray)]);
 
+    // Пагинация перелестывания стр
     const filterSort = (pageItem, value) => {
         return { year: filter.year, type: filter.type, page: pageItem + value, rating: filter.rating };
     }
 
+    // Пагинация знак
     const valueNav = (page, value) => {
         if (page === 1 && value === -1) {
             return "<"
