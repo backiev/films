@@ -5,9 +5,9 @@ const listsSlice = createSlice({
     name: 'lists',
     initialState: {
         lists: [
-            {index: 0, name: 'Любимые фильмы', value: [4532097, 4381953, 1451292, 4633578]},
-            {index: 1, name: 'Самые плохие фильмы', value: [4532097, 4381953, 1451292, 4633578, 1268791]},
-            {index: 2, name: 'Фильмы MARVEL', value: [1309570, 1199100]},
+            {index: 0, name: 'Любимые фильмы', note: 'Мои самые любимые фильмы', value: [4532097, 4381953, 1451292, 4633578]},
+            {index: 1, name: 'Самые плохие фильмы', note: 'Я их ненавижу', value: [4532097, 4381953, 1451292, 4633578, 1268791]},
+            {index: 2, name: 'Фильмы MARVEL', note: 'Все фильмы MARVEL которые посмотрел', value: [1309570, 1199100]},
         ]
     },
     reducers: {
@@ -24,8 +24,10 @@ const listsSlice = createSlice({
             state.lists[action.payload.idList].value.splice(action.payload.idMovie, 1);
         },
         removeList: (state, action) => {
-            // console.log(action.payload);
             state.lists.splice(action.payload, 1);
+        },
+        editNote: (state, action) => {
+            state.lists[action.payload.indexList].note = action.payload.newNote;
         },
         dragDrop: (state, action) => {
             const currentList = state.lists[action.payload.indexList];
@@ -46,6 +48,6 @@ const listsSlice = createSlice({
     }
 });
 
-export const {createList, addToList, addToLastList, removeFromList, removeList, dragDrop} = listsSlice.actions;
+export const {createList, addToList, addToLastList, removeFromList, removeList, editNote, dragDrop} = listsSlice.actions;
 
 export default listsSlice.reducer;

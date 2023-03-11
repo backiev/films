@@ -26,12 +26,18 @@ export const Modal = ({activeLists, setActiveLists, iconsHurts, setIconsHurts}) 
 
     const createNewList = () => {
         const newInputValue = inputValue.trim();
-        if (newInputValue.length) {
-            dispatch(createList(newInputValue));
-            setCheckedList([...checkedList, false]);
-            setInputValue('');
+        // проверка на длинные названия листов
+        if (newInputValue.length <= 30) {
+            // проверка есть ли вообще название у листа
+            if (newInputValue.length) {
+                dispatch(createList(newInputValue));
+                setCheckedList([...checkedList, false]);
+                setInputValue('');
+            } else {
+                setInputValue('Пустая строка!');
+            }
         } else {
-            setInputValue('Пустая строка!');
+            setInputValue('Слишком длинное название!');
         }
     } 
    

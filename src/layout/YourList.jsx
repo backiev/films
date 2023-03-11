@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { dragDrop, removeList } from '../app/ListsSlice';
+import { dragDrop, removeList, editNote} from '../app/ListsSlice';
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { CardList } from '../components/cards/CardList';
 import { Link } from "react-router-dom";
@@ -46,9 +46,15 @@ export const YourList = () => {
     // Редирект в компонент Lists, там удаление через location
     const  removeCurrentList = () => {
         navigate("/lists");
-        // console.log(listItem.index);
         const currentListRemoveId = lists.map(e => e.index).indexOf(listItem.index);
         dispatch(removeList(currentListRemoveId));
+    }
+
+    // Изменение Notes для Листа
+    const textAreaHandler = (e) => {
+        const note = e.target.value;
+        const currentListRemoveId = lists.map(e => e.index).indexOf(listItem.index);
+        dispatch(editNote({indexList: currentListRemoveId, newNote: note}));
     }
 
     return (
@@ -57,11 +63,11 @@ export const YourList = () => {
                 <h1 className='yourList-title'>Your list: <span style={{textDecoration: 'underline'}}>{listItem.name}</span></h1>
                 <div className='yourList-filter'>
                     <div className='yourList-filter__forwardLink'>
-                        <Link to={`/lists`}>Back to Links page</Link>
+                        <Link to={`/lists`}>Back to Lists page</Link>
                     </div>
                     <div className='yourList-filter__title'>Filters</div>
                     <div className="yourList-filter__year">
-                        <div className='yourList-filter__labels'>Edit your list somehow u want</div>
+                        <textarea className='yourList-filter__labels' id="note" name="note" disabled={editMode ? false : true} value={listItem.note} onChange={(e) => textAreaHandler(e)}></textarea>
                         <div className='yourList-filter__buttons'>
                             <button className='button' onClick={() => editMode ? setEditMode(false) : setEditMode(true)}>Edit</button>
                             <button className='button delete-button' onClick={() => removeCurrentList()}>Delete List</button>

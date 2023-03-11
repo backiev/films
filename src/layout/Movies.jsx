@@ -12,7 +12,7 @@ export const Movies = () => {
 
     const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
-        year: "2023",
+        year: "2022",
         type: "1",
         page: "1",
         rating: "7-10"
@@ -111,7 +111,7 @@ export const Movies = () => {
                         {valueNav(parseInt(filter.page), -1)}
                 </span>
                 
-                <span className="movies-pag__link">{filter.page}</span>
+                <span className="movies-pag__link" style={{background: "linear-gradient(blue, 10%, pink)"}}>{filter.page}</span>
                 
                 <span className="movies-pag__link" 
                     onClick={() => setFilter(filterSort(parseInt(filter.page), +1))}>

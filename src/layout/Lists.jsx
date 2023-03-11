@@ -36,9 +36,9 @@ export const  Lists = () => {
                 <div className='lists-filter'>
                     <div>Filters</div>
                     <div className='lists-filter__sort'>
-                        <label htmlFor="byWhat" className='lists-filter__byWhat'>Year</label>
+                        <label htmlFor="byWhat" className='lists-filter__byWhat'>Filter</label>
                         <select name="byWhat" id='byWhat' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
-                            <option value="index">By Index</option>
+                            <option value="index">By Date Added</option>
                             <option value="count">By Count</option>
                             <option value="name">By Name</option>
                         </select>
