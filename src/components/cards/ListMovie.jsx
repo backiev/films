@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { getMovie } from '../api/api';
+import { getMovie } from '../../api/api';
 
 export const ListMovie = ({list}) => {
 
   const listMovies = list.value;
   let lastMovieAdded;
-  const urlPoster = '/img/woman.jpg';
-
-  // console.log(listMovies);
+  const urlPoster = ' ';
 
   if (listMovies[0]) lastMovieAdded = listMovies[listMovies.length-1];
 

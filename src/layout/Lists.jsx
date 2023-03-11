@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ListMovie } from './ListMovie';
+import { ListMovie } from '../components/cards/ListMovie';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 

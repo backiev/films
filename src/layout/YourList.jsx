@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { dragDrop, removeList } from '../app/ListsSlice';
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { CardList } from './CardList';
+import { CardList } from '../components/cards/CardList';
 import { Link } from "react-router-dom";
 
 
@@ -83,8 +83,6 @@ export const YourList = () => {
                     }
                 </div>
             </div>
-            {/* {deleted ? <Navigate to="/lists" replace state={{from: location, listId: listId}}/> : ' '} */}
-            {/* {error ? <Navigate to="/lists" replace state={{from: location}}/> : ' '} */}
         </div>
     )
 }

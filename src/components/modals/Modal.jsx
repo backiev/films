@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createList, addToList, removeFromList } from '../app/ListsSlice';
+import { createList, addToList, removeFromList } from '../../app/ListsSlice';
 
 import { ModalItem } from './ModalItem';
 

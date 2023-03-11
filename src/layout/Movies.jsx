@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { CardMovie } from './CardMovie';
+import { CardMovie } from '../components/cards/CardMovie';
 import { getMovies } from '../api/api';
-import { Modal } from './Modal';
-import { Modalinfo } from './ModalInfo';
+import { Modal } from '../components/modals/Modal';
+import { Modalinfo } from '../components/modals/ModalInfo';
 import { useSelector } from 'react-redux';
 
 
@@ -12,7 +12,7 @@ export const Movies = () => {
 
     const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
-        year: "2020-2023",
+        year: "2023",
         type: "1",
         page: "1",
         rating: "7-10"

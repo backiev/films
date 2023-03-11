@@ -4,10 +4,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import { Movies } from './components/Movies';
-import { Lists } from './components/Lists';
-import { YourList } from './components/YourList';
-import { Error } from './modules/Error';
+import { Movies } from './layout/Movies';
+import { Lists } from './layout/Lists';
+import { YourList } from './layout/YourList';
+import { Error } from './layout/Error';
 
 
 import { createRoot } from 'react-dom/client';

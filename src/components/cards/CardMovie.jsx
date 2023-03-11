@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { addToLastList, removeFromList } from '../app/ListsSlice';
+import { addToLastList, removeFromList } from '../../app/ListsSlice';
 
 
 export const CardMovie = ({movie, setActiveInfo, setActiveLists, iconsHurts, setIconsHurts}) => {

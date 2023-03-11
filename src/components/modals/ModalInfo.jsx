@@ -31,6 +31,9 @@ export const Modalinfo = ({activeInfo, setActiveInfo}) => {
                         <span className='modal__info-main-title'>Votes:</span> {movie.votes ? movie.votes.kp : 'Нет информации'}
                     </div>
                     <div>
+                        <span className='modal__info-main-title'>Id Film:</span> {movie.id ? movie.id : 'Нет информации'}
+                    </div>
+                    <div>
                         <span className='modal__info-main-title'>Description:</span> {movie.description ? movie.description : 'Нет информации'}
                     </div>
                 </div>

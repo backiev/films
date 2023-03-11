@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getMovie } from '../api/api';
-import { removeFromList } from '../app/ListsSlice';
+import { getMovie } from '../../api/api';
+import { removeFromList } from '../../app/ListsSlice';
 
 
 
