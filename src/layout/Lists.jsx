@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ListMovie } from '../components/cards/ListMovie';
+import { Select } from '../components/ui/Select';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
@@ -8,6 +9,11 @@ export const  Lists = () => {
     const [filter, setFilter] = useState({
         byWhat: 'index',
     });
+    const optionsType = [
+        {value: "index", valueTag: "By Date Added"},
+        {value: "count", valueTag: "By Count"},
+        {value: "name", valueTag: "By Name"},
+    ];
 
 
     // Сортировка по фильтру
@@ -29,20 +35,17 @@ export const  Lists = () => {
         }
     }
 
+
     return (
         <div className='lists'>
             <div className="container">
                 <h1 className='lists-title'>Lists</h1>
                 <div className='lists-filter'>
                     <div>Filters</div>
-                    <div className='lists-filter__sort'>
-                        <label htmlFor="byWhat" className='lists-filter__byWhat'>Filter</label>
-                        <select name="byWhat" id='byWhat' value={filter.byWhat} onChange={(e) => setFilter({byWhat: e.target.value})}>
-                            <option value="index">By Date Added</option>
-                            <option value="count">By Count</option>
-                            <option value="name">By Name</option>
-                        </select>
-                    </div>
+                    <Select 
+                        name={"Filter"} options={optionsType} filter={filter.type} setFilter={setFilter} 
+                        setNewFilter={(e) => ({byWhat: e.target.value})} 
+                        classes={{divClass: "lists-filter__sort", labelClass: "lists-filter__byWhat"}}/>
                 </div>
                 <div className="lists-list">
 

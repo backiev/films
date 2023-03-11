@@ -4,11 +4,30 @@ import { getMovies } from '../api/api';
 import { Modal } from '../components/modals/Modal';
 import { Modalinfo } from '../components/modals/ModalInfo';
 import { useSelector } from 'react-redux';
+import { Select } from '../components/ui/Select';
 
 
 
 export const Movies = () => {
     const lists = useSelector(state => state.lists.lists);
+    const optionsYears = [
+        {value: "2023", valueTag: "2023"},
+        {value: "2022", valueTag: "2022"},
+        {value: "2021", valueTag: "2021"},
+        {value: "2020", valueTag: "2020"},
+        {value: "2019", valueTag: "2019"},
+        {value: "2018", valueTag: "2018"},
+        {value: "2017", valueTag: "2017"},
+    ];
+    const optionsType = [
+        {value: "1", valueTag: "films"},
+        {value: "2", valueTag: "tv-series"},
+        {value: "3", valueTag: "cartoon"},
+        {value: "4", valueTag: "anime"},
+        {value: "5", valueTag: "animated-series"},
+        {value: "6", valueTag: "tv-show"},
+        {value: "7", valueTag: "mini-series"},
+    ];
 
     const [arrMovies, setArrMovies] = useState([]);
     const [filter, setFilter] = useState({
@@ -54,6 +73,8 @@ export const Movies = () => {
         getMovies(filter, setArrMovies);
     }, [filter]);
 
+
+
   return (
     <>
     <div className='movies'>
@@ -62,20 +83,17 @@ export const Movies = () => {
             <div className='movies-filter'>
                 <div className='movies-filter__title'>Filters</div>
                 <div className='movies-filter__buttons'>
-                    <div className="movies-filter__year">
-                        <label htmlFor="year" className='movies-filter__year-title'>Year</label>
-                        <select name="year" id='year' value={filter.year} onChange={(e) => setFilter({ year: e.target.value, type: filter.type, page: "1", rating: filter.rating })}>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                        </select>
-                    </div>
+                    <Select 
+                        name={"Year"} options={optionsYears} filter={filter.year} setFilter={setFilter} 
+                        setNewFilter={(e) => ({ year: e.target.value, type: filter.type, page: "1", rating: filter.rating })} 
+                        classes={{divClass: "movies-filter__type", labelClass: "movies-filter__type-title"}}
+                        />
+                    <Select 
+                        name={"Type"} options={optionsType} filter={filter.type} setFilter={setFilter} 
+                        setNewFilter={(e) => ({ year: filter.year, type: e.target.value, page: "1", rating: filter.rating })} 
+                        classes={{divClass: "movies-filter__type", labelClass: "movies-filter__type-title"}}
+                        />
+                    
                     <div className="movies-filter__type">
                         <label htmlFor="type" className='movies-filter__type-title'>Type</label>
                         <select name="type" id='type' value={filter.type} onChange={(e) => setFilter({ year: filter.year, type: e.target.value, page: "1", rating: filter.rating })}>
