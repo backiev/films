@@ -25,8 +25,8 @@ export const Modal = ({activeLists, setActiveLists, iconsHurts, setIconsHurts}) 
 
 
     const createNewList = () => {
-        const newInputValue = inputValue.trim().length;
-        if (newInputValue) {
+        const newInputValue = inputValue.trim();
+        if (newInputValue.length) {
             dispatch(createList(newInputValue));
             setCheckedList([...checkedList, false]);
             setInputValue('');

@@ -24,6 +24,7 @@ const listsSlice = createSlice({
             state.lists[action.payload.idList].value.splice(action.payload.idMovie, 1);
         },
         removeList: (state, action) => {
+            // console.log(action.payload);
             state.lists.splice(action.payload, 1);
         },
         dragDrop: (state, action) => {

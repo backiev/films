@@ -20,8 +20,8 @@ export const YourList = () => {
 
 
     const listId = useParams().listId;
-
-    const listItem = useSelector(state => state.lists.lists.find(({index}) => index === parseInt(listId)));
+    const lists = useSelector(state => state.lists.lists);
+    const listItem = lists.find(({index}) => index === parseInt(listId));
     const listValue = listItem.value;
     // console.log(listItem[4], listValue);
 
@@ -46,7 +46,9 @@ export const YourList = () => {
     // Редирект в компонент Lists, там удаление через location
     const  removeCurrentList = () => {
         navigate("/lists");
-        dispatch(removeList(listId));
+        // console.log(listItem.index);
+        const currentListRemoveId = lists.map(e => e.index).indexOf(listItem.index);
+        dispatch(removeList(currentListRemoveId));
     }
 
     return (
