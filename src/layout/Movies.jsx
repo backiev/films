@@ -5,6 +5,8 @@ import { Modal } from '../components/modals/Modal';
 import { Modalinfo } from '../components/modals/ModalInfo';
 import { useSelector } from 'react-redux';
 import { Select } from '../components/ui/Select';
+import { Pagination } from '../components/ui/Pagination';
+
 
 
 
@@ -55,20 +57,6 @@ export const Movies = () => {
     lists.map(item => item.value.map(movieIndex => hurtsArray.push(movieIndex)));
     const [iconsHurts, setIconsHurts] = useState([...new Set(hurtsArray)]);
 
-    // Пагинация перелестывания стр
-    const filterSort = (pageItem, value) => {
-        return { year: filter.year, type: filter.type, page: pageItem + value, rating: filter.rating };
-    }
-
-    // Пагинация знак
-    const valueNav = (page, value) => {
-        if (page === 1 && value === -1) {
-            return "<"
-        } else {
-            return page + value;
-        }
-    }
-
     useEffect(() => {
         getMovies(filter, setArrMovies);
     }, [filter]);
@@ -93,19 +81,6 @@ export const Movies = () => {
                         setNewFilter={(e) => ({ year: filter.year, type: e.target.value, page: "1", rating: filter.rating })} 
                         classes={{divClass: "movies-filter__type", labelClass: "movies-filter__type-title"}}
                         />
-                    
-                    <div className="movies-filter__type">
-                        <label htmlFor="type" className='movies-filter__type-title'>Type</label>
-                        <select name="type" id='type' value={filter.type} onChange={(e) => setFilter({ year: filter.year, type: e.target.value, page: "1", rating: filter.rating })}>
-                            <option value="1">films</option>
-                            <option value="2">tv-series</option>
-                            <option value="3">cartoon</option>
-                            <option value="4">anime</option>
-                            <option value="5">animated-series</option>
-                            <option value="6">tv-show</option>
-                            <option value="7">mini-series</option>
-                        </select>
-                    </div>
                 </div>
             </div>
             <div className="movies-list">
@@ -122,21 +97,10 @@ export const Movies = () => {
                 )}
 
             </div>
-            <ul className="movies-pag">
-                
-                <span className="movies-pag__link" 
-                    onClick={() => parseInt(filter.page) !== 1 ? setFilter(filterSort(parseInt(filter.page), -1)) : ' '}>
-                        {valueNav(parseInt(filter.page), -1)}
-                </span>
-                
-                <span className="movies-pag__link" style={{background: "linear-gradient(blue, 10%, pink)"}}>{filter.page}</span>
-                
-                <span className="movies-pag__link" 
-                    onClick={() => setFilter(filterSort(parseInt(filter.page), +1))}>
-                        {valueNav(parseInt(filter.page), 1)}
-                </span>
-                
-            </ul>
+            <Pagination 
+                filter={filter.page} setFilter={setFilter}
+                setNewFilter={(pageItem, value) => ({ year: filter.year, type: filter.type, page: pageItem + value, rating: filter.rating })}
+            />
         </div>
     </div>
     <Modalinfo activeInfo={activeInfo} setActiveInfo={setActiveInfo} />
